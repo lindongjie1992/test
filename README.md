@@ -1,5 +1,6 @@
 ## instruct
 
-npm run build
+npm run build  
+
 npm run start
 
