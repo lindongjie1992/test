@@ -1,2 +1,6 @@
-# test
-测试项目
+## instruct
+
+npm run build  
+
+npm run start
+
