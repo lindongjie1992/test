@@ -11,42 +11,41 @@
     <meta content="email=no" name="format-detection" />
     <title>乾壹金服</title>
     <link rel="stylesheet" href="build/css/main.min.css">
+    <script src="build/js/jquery-1.12.js"></script>
+    <script src="build/js/jquery.pjax.js"></script>
+    <script src="build/js/nprogress.js"></script>
+    <script src="build/js/swiper-3.4.2.jquery.min.js"></script>
 </head>
 
 <body>
     <div id="page-main">
-        <!-- 头部开始 -->
-        <header id="header">
-            <h1 class="title">头部</h1>
-        </header>
-        <!-- 头部结束 -->
-
         <!-- 主体内容开始 -->
         <section id="content">
-            关于我们
+            资讯
         </section>
         <!-- 主体内容结束 -->
         
         <!-- 底部开始 -->
         <nav id="nav">
             <a class="nav-item" data-pjax href="index.html">
-                <i class="nav-icon fa fa-home"></i>
+                <i class="nav-icon iconfont">&#xe62b;</i>
                 <span class="nav-title">首页</span>
             </a>
-            <a class="nav-item active" data-pjax href="about.html">
-                <i class="nav-icon fa fa-key"></i>
-                <span class="nav-title">关于</span>
+            <a class="nav-item" data-pjax href="invest.html">
+                <i class="nav-icon iconfont">&#xe609;</i>
+                <span class="nav-title">投资</span>
+            </a>
+            <a class="nav-item active" data-pjax href="news.html">
+                <i class="nav-icon iconfont">&#xe605;</i>
+                <span class="nav-title">资讯</span>
             </a>
             <a class="nav-item" data-pjax href="user.html">
-                <i class="nav-icon fa fa-user-o"></i>
-                <span class="nav-title">用户</span>
+                <i class="nav-icon iconfont">&#xe65c;</i>
+                <span class="nav-title">我的</span>
             </a>
         </nav>
         <!-- 底部结束 -->
         <script src="build/js/main.min.js"></script>
-        <script>
-            setTitle('关于我们');
-        </script>
     </div>
 </body>
 

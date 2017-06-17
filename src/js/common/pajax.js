@@ -1,9 +1,10 @@
 (function ($) {
+    NProgress.configure({ showSpinner: false });
     $(document).pjax('a[data-pjax]', '#page-main', {
         fragment: "#page-main",
         timeout: 8000
     });
-    NProgress.configure({ showSpinner: false });
+    
     $(document).on('pjax:start', function (a) {
         NProgress.start();
     });
