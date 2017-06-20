@@ -1,21 +1,9 @@
 var tool = (function () {
-    // tool.checkbox(function (flag) {
-    //     console.log(flag);
-    // });
-    function checkbox(callback) {
-        var checkbox = $('input[type=checkbox]');
-        checkbox.each(function () {
-            if ($(this).is(":checked")) {
-                $(this).parent().addClass('checked');
-            }
-        });
-        checkbox.on('click', function () {
-            if (checkbox.is(":checked")) {
-                $(this).parent().addClass('checked');
-            } else {
-                $(this).parent().removeClass('checked');
-            }
-            callback && callback(checkbox.is(":checked") ? true : false);
+
+    function itemContentRadio(){
+        $('.item-content.radio').on('click',function(e){
+            $(this).find('input[type=radio]').prop('checked',true);
+            return false;
         });
     }
 
@@ -28,7 +16,7 @@ var tool = (function () {
         });
     }
     return {
-        checkbox: checkbox,
+        itemContentRadio: itemContentRadio,
         tabs : tabs
     }
 })();

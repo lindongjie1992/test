@@ -33,11 +33,11 @@
                 <div class="swiper-pagination"></div>
             </div>
             <p>
-                <label class="checkbox-box">
-                    <input class="checkbox" type="checkbox">
-                </label>
-                <span class="middle">这是协议</span>
+                <input id="checkbox1" class="checkbox" type="checkbox">
+                <label for="checkbox1" class="checkbox-box"></label>
+                <span class="middle">checkbox</span>
             </p>
+
             <div class="list-block">
                 <ul>
                     <li class="item-content item-link">
@@ -58,26 +58,57 @@
                             <div class="item-after">asd</div>
                         </div>
                     </li>
-                    <li class="item-content">
+                    <li class="item-content radio">
                         <div class="item-inner">
-                            <div class="item-title label">姓名</div>
-                            <div class="item-input">
-                                <input autocomplete="off" type="text" placeholder="请输入您的姓名">
+                            <div class="item-title">男</div>
+                            <div class="item-after">
+                                <input id="radio1" name="user" type="radio">
+                                <label for="radio1" class="radio-box"></label>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content radio">
+                        <div class="item-inner">
+                            <div class="item-title">女</div>
+                            <div class="item-after">
+                                <div class="item-after">
+                                    <input id="radio2" name="user"  type="radio">
+                                    <label for="radio2" class="radio-box"></label>
+                                </div>
                             </div>
                         </div>
                     </li>
                     <li class="item-content">
-                        <div class="item-inner">
-                            <div class="item-title label">短信验证码</div>
+                        <div class="item-inner icon cancel">
+                            <div class="item-title label"><i class="iconfont">&#xe60f;</i></div>
+                            <div class="item-input">
+                                <input autocomplete="off" type="tel" placeholder="请输入手机号码" maxlength="11">
+                            </div>
+                            <div class="item-cancel"><i class="iconfont">&#xe682;</i></div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner icon spass">
+                            <div class="item-title label"><i class="iconfont">&#xe70e;</i></div>
+                            <div class="item-input">
+                                <input autocomplete="off" type="password" placeholder="请输入密码">
+                            </div>
+                            <div class="item-spass"><i class="iconfont">&#xe62c;</i></div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner icon">
+                            <div class="item-title label"><i class="iconfont">&#xe622;</i></div>
                             <div class="item-input">
                                 <input autocomplete="off" type="text" placeholder="请输入验证码" maxlength="4">
                             </div>
-                            <a href="javascript:void(0)" class="item-btn">获取验证码</a>
+                            <a href="javascript:void(0)" class="item-btn" id="J_GetCode">获取验证码</a>
                         </div>
                     </li>
                 </ul>
             </div>
-
+            
+            <!-- tabs -->
             <div class="buttons-tab" style="margin-top:3rem;">
                 <a href="#tab1" class="tab-link button active">全部</a>
                 <a href="#tab2" class="tab-link button">待付款</a>
@@ -99,6 +130,27 @@
                         <p>This is tab 3 content</p>
                     </div>
                 </div>
+            </div>
+            
+            <!-- 弹出 -->
+            <div class="content-box" style="margin-top:30px;">
+                <a class="btn block btn01" id="showMsg" href="javascript:void(0)">弹出消息</a>
+            </div>
+            
+            <!-- 日历 -->
+            <div id="my-input" data-toggle='date' style="margin:3rem 0;" />
+            
+            <!-- 支付密码 -->
+            <div class="content-box">
+                <a class="btn block btn01" id="J_OpenKeyBoard" href="javascript:void(0)">输入支付密码</a>
+            </div>
+
+            <div class="demo-spinner demo-small-pitch" style="margin:30px 0;">
+                <span class="m-spinner" id="J_Quantity">
+                    <a href="javascript:;" class="J_Del"></a>
+                    <input type="text" class="J_Input" placeholder=""/>
+                    <a href="javascript:;" class="J_Add"></a>
+                </span>
             </div>
 
         </section>
@@ -123,9 +175,77 @@
                 <span class="nav-title">我的</span>
             </a>
         </nav>
+        
+
+        <div class="m-keyboard" id="J_KeyBoard">
+            <!-- 自定义内容区域 -->
+            <div style="text-align: right;padding: .15rem .8rem 0;"><a href="#" style="color: #666;font-size: .8rem;">忘记密码</a></div>
+            <!-- 自定义内容区域 -->
+        </div>
         <!-- 底部结束 -->
         <script src="build/js/main.min.js"></script>
+        <script>
+            $("#my-input").calendar();
+
+            var $keyboard = $('#J_KeyBoard');
+            // 初始化参数
+            $keyboard.keyBoard({
+                disorder: false, // 是否打乱数字顺序
+            });
+            // 打开键盘
+            $('#J_OpenKeyBoard').on('click', function () {
+                $keyboard.keyBoard('open');
+            });
+
+            // 六位密码输入完毕后执行
+            $keyboard.on('done.ydui.keyboard', function (ret) {
+                console.log('输入的密码是：' + ret.password);
+                dialog.loading.open('验证支付密码');
+                setTimeout(function(){
+                    dialog.loading.close();
+                    $keyboard.keyBoard('error', '对不起，您的支付密码不正确，请重新输入。');
+                },2000);
+            });
+
+            $('#showMsg').on('click', function () {
+               dialog.confirm('选填标题', '我有一个小毛驴我从来也不骑！', function () {
+                    dialog.toast('你点了确定', 'none', 2000);
+               });
+            });
+
+            $('#J_Quantity').spinner({
+                input: '.J_Input',
+                add: '.J_Add',
+                minus: '.J_Del',
+                callback: function (value, $ele) {
+                    console.log('值：' + value);
+                }
+            });
+
+            var $getCode = $('#J_GetCode');
+            // 定义参数
+            $getCode.sendCode({
+                disClass: 'btn-disabled', // 禁用按钮样式【必填】
+                secs: 15, // 倒计时时长 [可选，默认：60秒]
+                run: false,// 是否初始化自动运行 [可选，默认：false]
+                runStr: '{%s}秒后重新获取',// 倒计时显示文本 [可选，默认：58秒后重新获取]
+                resetStr: '重新获取验证码'// 倒计时结束后按钮显示文本 [可选，默认：重新获取验证码]
+            });
+
+            $getCode.on('click', function () {
+                var $this = $(this);
+                dialog.loading.open('发送中...');
+                // ajax 成功发送验证码后调用【start】
+                setTimeout(function () { //模拟ajax发送
+                    dialog.loading.close();
+                    $this.sendCode('start');
+                    dialog.toast('已发送', 'success', 1500);
+                }, 800);
+            });
+
+        </script>
     </div>
+
 </body>
 
 </html>

@@ -205,7 +205,11 @@ th {
 }
 ul{
   padding:0;
+  margin:0;
   list-style: none;
+}
+p{
+  margin:0;
 }
 
 .list-block input[type="text"], .list-block input[type="password"], .list-block input[type="search"], .list-block input[type="email"], .list-block input[type="tel"], .list-block input[type="url"], .list-block input[type="date"], .list-block input[type="datetime-local"], .list-block input[type="time"], .list-block input[type="number"], .list-block select, .list-block textarea {

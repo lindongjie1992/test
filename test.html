@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  input{
+    width:60px;
+    height:60px;
+    font-size:40px;
+    line-height: 60px;
+  }
+</style>
+<body>
+<input type="password"/>
+<input type="password"/>
+<input type="password"/>
+<input type="password"/>
+</body>
+<script src="src/js/lib/jquery-1.12.js"></script>
+<script>
+  $(function(){
+    var ww=2222;//服务器验证码
+    $('input').eq(0).focus();
+    $('input').keyup(function(){
+      if($(this).val().length==1){
+        $(this).next().focus()
+      }
+    })
+    $('input').eq($('input').length-1).keyup(function(){
+          var valed=''
+          for(var i=0;i<$('input').length;i++){
+            valed=valed+$('input').eq(i).val()
+          }
+          if(Number(valed)==ww){
+            alert('输入正确')
+          }else{
+            alert('输入错误')
+          }
+    }
+    )
+  })
+</script>
+</html>
